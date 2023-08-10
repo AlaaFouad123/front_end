@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scal=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 56px;
+                padding: 0 16px;
+            }
+            .left-section{
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+            }
+            .left-section img {
+                width: 60%;
+                padding-left: 16px;
+                padding-top: 16px;
+            }
+            .mid-section{
+                display: flex;
+                align-items: center;
+                margin-left: -9%;
+            }
+            .mid-section form{
+                display: flex;
+                height: 40px;
+                width: 628px;
+            }
+            .mid-section input{
+                width: 100%;
+                border-radius: 2px 0 0 2px;
+                padding: 12px;
+                font-size: 1.6rem;
+                border: 1px solid #d3d3d3;
+                border-right: none;
+            }
+            .mid-section button {
+                width: 64px;
+                border: 1px solid #d3d3d3;
+                border-radius: 0 2px 2px 0;
+                padding: 4px;
+                background-color: #f8f8f8;
+                cursor: pointer;
+            }
+            .mid-section button:hover{
+                border-color: #c6c6c6;
+                background-color: #f0f0f0;
+            }
+            .mid-section .mic{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #f9f9f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+            .right-section a{
+                padding-right: 18px;
+                text-decoration: none;
+                color: black;
+            }
+            .content-area{
+                height: calc(100vh - 56px);
+                display: flex;
+                background-color: #f9f9f9;
+            }
+            aside {
+                height: 100%;
+                width: 280px;
+                background-color: white;
+                overflow-y: auto;
+            }
+            .c {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin: 15px 0;
+                padding-right: 15px;
+            }
+           .nav-link{
+               display: flexbox;
+               align-items: center;
+               padding: 10px 16px;
+               text-decoration: none;
+               color: black;
+           }
+           .nav-link:hover{
+               background-color: rgba(0, 0, 0, 0.05);}
+
+
+
+
+
+
+
+
+           .nav-link span{
+               margin-left: 24px;
+               font-size: 1.4rem;
+               line-height: 2em;
+               font-weight: 400;
+               color: #030303;
+           }
+           .active{
+               background-color: #e5e5e5;
+           }
+           #active-span{
+               font-weight: 500;
+           }
+           hr{
+               height: 1px;
+               background-color: #e5e5e5;
+               border: none;
+               margin: 10px 0;
+           }
+
+           nav p{
+               font-size: 1.4rem;
+               color: #606060;
+               font-weight: 500;
+               padding: 8px 16px;
+               text-transform: uppercase;
+           }
+           .channel-img{
+               height: 24px;
+               width: 24px;
+               border-radius: 50%;
+           }
+           main{
+               width: 100%;
+               height: 100%;
+               padding: 35px 15px;
+               border-top: 1px solid #ddd;
+               overflow-y: auto;
+           }
+           .videos-container{
+               display: flex;
+               flex-direction: row;
+               justify-content: space-around;
+               flex-wrap: wrap;
+           }
+           .video{
+               width: 330px;
+               margin-bottom: 40px;
+               cursor: pointer;
+           }
+           .thumbnail {
+               width: 100%;
+               height: 187px;
+               margin-bottom: 12px;
+           }
+           .thumbnail img{
+               height: 100%;
+               width: 100%;
+           }
+           .video-details{
+               display: flex;
+           }
+           .creator-img img{
+               height: 40px;
+               width: 40px;
+               border-radius: 50%;
+               margin-right: 12px;
+           }
+           .title{
+               display: flex;
+               flex-direction: column;
+           }
+           .title a{
+               text-decoration: none;
+
+           }
+           .video-title{
+               color: rgb(3, 3, 3);
+               font-size: 1.6rem;
+               max-width: 278px;
+               font-weight: 500;
+               line-height: 2.2rem;
+               margin-bottom: 4px;
+               overflow: hidden;
+               display: -webkit-box;
+               -webkit-line-clamp: 2;
+               -webkit-box-orient: vertical;
+           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            html{
+                font-size: 10px;
+            }
+            body {
+                font-family: "Roboto","Arial",sans-serif;
+            }
+        </style>
+        <style>
+            .container {
+              display: inline-block;
+              cursor: pointer;
+              padding: 0 16px;
+              
+            }
+            
+            .bar1, .bar2, .bar3 {
+              width: 25px;
+              height: 3px;
+              background-color: #333;
+              margin: 6px 0;
+              transition: 0.4s;
+              padding: 0 16px;
+             
+            }
+            
+            .change .bar1 {
+              -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+              transform: rotate(-45deg) translate(-9px, 6px);
+              padding: 0 16px;
+            }
+            
+            .change .bar2 {opacity: 0;padding: 0 16px; display: flex;}
+    
+            
+            .change .bar3 {
+              -webkit-transform: rotate(45deg) translate(-8px, -8px);
+              transform: rotate(45deg) translate(-8px, -8px);
+              padding: 0 16px;
+            
+            }
+            </style>
+        </head>
+        <body>
+          <header>
+              <div class="left-section"> 
+                  <i class="material-icon logo"></i>
+                  <img src="F:\تنزيل.png" width="100" height="70">
+              </div>
+              <div class="mid-section">
+                  <form action="">
+                      <input type="text" placeholder="Search" />
+                      <button><i class="fa fa-search">Search</i></button>
+                      <i style="font-size: 20px;" class="fa mic">&#xf130;</i>
+                  </form>
+                  <i class="material-icons"></i>
+              </div>
+              <div class="right-section">
+                <a href=""><i style="font-size: 20px;" class="fa">&#xf03d;</i> </a>
+                <a href=""><i style="font-size: 20px;" class="fa fa-user-circle-o fa-spin"></i> </a>
+                <a href=""><i style="font-size: 20px;" class="fa fa-instagram"></i> </a>
+                <a href=""><i style="font-size: 20px;" class="fa fa-wifi fa-spin"></i> </a>
+              </div>
+              
+              </script>
+          </header>
+           <div class="content-area">
+            <aside>
+               <nav style="color: white;">
+                <div class="container" onclick="myFunction(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                  </div>
+                  
+                  <script>
+                  function myFunction(x) {
+                    x.classList.toggle("change");
+                  }
+                  </script>
+                  <aside class="c">
+                    <a href="" class="nav-link active">
+                        <i style="font-size: 20px;" class="fa fa-home"></i>
+                    <span id="active-span">Home</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-compass"></i>
+                    <span>Explore</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;color: red;" class="fa fa-youtube-play"></i>
+                    <span>Subscriptions</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-tv"></i>
+                    <span>Originals</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-music"></i>
+                    <span>Youtube Music</span>
+                    </a>
+                    <hr>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-book"></i>
+                    <span>Library</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-history"></i>
+                    <span>History</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-play"></i>
+                    <span>Your videos</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-clock-o"></i>
+                    <span>Watch later</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-download"></i>
+                    <span>Download</span>
+                    </a>
+                    <a href="" class="nav-link">
+                        <i style="font-size: 20px;" class="fa fa-hand-stop-o"></i>
+                    <span>Liked videos</span>
+                    </a>
+                
+                <hr>
+                <p>Subscriptions</p>
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+               
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+               
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+                
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+               
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+                
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+                
+                <a href="" class="nav-link">
+                    <img class="channel-img" src="F:\FrameArt_202172023151501~4.jpg">
+                <span>Alaa Fouad mohamed</span>
+                </a>
+
+                </aside></aside></nav>
+                <main><span>
+                    <div class="videos-container">
+                     <div class="video">
+                         <div class="thumbnail">
+                          <img src="F:\20220312_175155~4.jpg"/>                          
+                         </div>
+                         <div class="video-details">
+                           <div class="creator-img">
+                            <img src="F:\FrameArt_202172023151501~4.jpg"/>
+
+                           </div>
+                            <div class="title">
+                                <a href="" class="video-title">
+                                 Five moons on the earth
+                                </a>
+                                <a href="" class="video-creator">
+                                    Alaa fouad
+
+
+                                </a>
+                                <span>32M Views * 3 Hours Ago</span>
+                            </div>
+                            
+                         </div>
+
+                        
+
+
+
+
+
+
+                     </div>
+                    
+                        <div class="video">
+                            <div class="thumbnail">
+                             <img src="F:\Screenshot_20220404-195506.jpg"/>                         
+                            </div>
+                            <div class="video-details">
+                              <div class="creator-img">
+                               <img src="F:\FrameArt_202172023151501~4.jpg"/>
+   
+                              </div>
+                               <div class="title">
+                                   <a href="" class="video-title">
+                                    Watch befor deleting seven girl kill each other
+                                   </a>
+                                   <a href="" class="video-creator">
+                                       Alaa fouad
+   
+   
+                                   </a>
+                                   <span>78M Views * 18Hours Ago</span>
+                               </div>
+                               
+                            </div>
+   
+                        </div>
+   
+   
+                    
+                       
+                        <div class="video">
+                            <div class="thumbnail">
+                             <img src="F:\B612_20210514_171646_018.jpg"/>
+   "                          
+                            </div>
+                            <div class="video-details">
+                              <div class="creator-img">
+                               <img src="F:\FrameArt_202172023151501~4.jpg"/>
+   
+                              </div>
+                               <div class="title">
+                                   <a href="" class="video-title">
+                                    Two dangerous creator be care if you met them
+                                   </a>
+                                   <a href="" class="video-creator">
+                                       Alaa fouad
+   
+   
+                                   </a>
+                                   <span>77M Views * 2Days Ago</span>
+                               </div>
+                               
+                            </div>
+   
+                        </div>
+                        <div class="video">
+                            <div class="thumbnail">
+                             <img src="F:\IMG_20220126_120133_225~3.jpg"/>
+   "                          
+                            </div>
+                            <div class="video-details">
+                              <div class="creator-img">
+                               <img src="F:\FrameArt_202172023151501~4.jpg"/>
+   
+                              </div>
+                               <div class="title">
+                                   <a href="" class="video-title">
+                                    no thing force you to have red eyes
+                                   </a>
+                                   <a href="" class="video-creator">
+                                       Alaa fouad
+   
+   
+                                   </a>
+                                   <span>235M Views * 2Days Ago</span>
+                               </div>
+                               
+                            </div>
+   
+                        </div>
+                        <div class="video">
+                            <div class="thumbnail">
+                             <img src="F:\PicsArt_03-13-05.54.28.jpg"/>
+   "                          
+                            </div>
+                            <div class="video-details">
+                              <div class="creator-img">
+                               <img src="F:\FrameArt_202172023151501~4.jpg"/>
+   
+                              </div>
+                               <div class="title">
+                                   <a href="" class="video-title">
+                                    Very enjoyable game play it with your friends be sure that you will enjoy
+                                   </a>
+                                   <a href="" class="video-creator">
+                                       Alaa fouad
+   
+   
+                                   </a>
+                                   <span>7M Views * 2Days Ago</span>
+                               </div>
+                               
+                            </div>
+   
+                        </div>
+   
+   
+                       
+                       
+                                                
+                        
+
+
+   
+                       
+                       
+                        <div class="video">
+                            <div class="thumbnail">
+                             <img src="F:\PicsArt_03-03-12.30.03.jpg"/>
+   "                          
+                            </div>
+                            <div class="video-details">
+                              <div class="creator-img">
+                               <img src="F:\FrameArt_202172023151501~4.jpg"/>
+   
+                              </div>
+                               <div class="title">
+                                   <a href="" class="video-title">
+                                    The mircle of the 22 era three girls have the most intelgent brain
+                                   </a>
+                                   <a href="" class="video-creator">
+                                       Alaa fouad
+   
+   
+                                   </a>
+                                   <span>112MViews * 2Days Ago</span>
+                               </div>
+                               
+                            </div>
+   
+                        </div>
+   
+   
+                       </div>
+                    
+                   
+   
+   
+
+   
+   
+
+                    </span>
+
+                </main>
+               
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+          
+        </body>
+</html>
